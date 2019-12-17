@@ -9,3 +9,9 @@ for description of files and edits requred to deploy the feature.
 
 
 - Laravel V6.7
+
+
+registered user profile for tesing
+
+- user email: admin@admin.com
+- passwor: admin1234
