@@ -11,14 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+Route::resource('expensetype','expenseTypeController',['except'=>['edit','update','show','delete']]);
+//Route::post('expenses/{expense_type_id}',['uses'=>'expenseController@store', 'as'=>'expense.store']);
+Route::resource('expenses','expenseController',['except'=>['edit','update','show','delete']]);
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
