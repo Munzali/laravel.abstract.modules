@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Expense;
 use App\Expensetype;
-use App\User;
+use DB;
+
 
 class expenseController extends Controller
 {
@@ -21,7 +22,28 @@ class expenseController extends Controller
     public function index()
     {
         //
+
+        $expensetypes=DB::table('expensetypes')->pluck("name","id")->all();
+        return view('expenses.output')->with('expensetypes',$expensetypes);
+
     }
+  public function fetchdata(Request $request)
+
+    {
+
+        if($request->ajax()){
+
+            $list = DB::table('expenses')->where('expensetype_id',$request->expensetype_id)->pluck("name","id")->all();
+
+            $data = view('expenses.suboutput',compact('list'))->render();
+
+            return response()->json(['options'=>$data]);
+
+        }
+
+    }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -31,7 +53,7 @@ class expenseController extends Controller
     public function create()
     {
         //
-        return view('expenses.expense');
+        //return view('expenses.expense');
     }
 
     /**
@@ -40,7 +62,7 @@ class expenseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$expense_type_id)
     {
         //
         $this->validate($request,[
@@ -48,14 +70,14 @@ class expenseController extends Controller
             'name'=>'required' 
 
         ]);
-       // $expensetype=new Expensetype;
+        $expensetype=Expensetype::find($expense_type_id);
         $expenses=new Expense;
 
         $expenses->name=$request->input('name');
-       // $expenses->expensetype()->associate($expensetype);
+        $expenses->expensetype()->associate($expensetype);
         $expenses->user_id=auth()->user()->id;
         $expenses->save();
-        return redirect('./viewexpense')->with('success','submitted');
+        return redirect('expenses')->with('success','submitted');
         
 
     }

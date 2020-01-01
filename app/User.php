@@ -37,6 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function expensetype(){
+        return $this->hasMany('App\Expensetype');
+    }
     public function expense(){
         return $this->hasMany('App\Expense');
     }

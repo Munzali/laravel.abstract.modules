@@ -20,7 +20,8 @@ class expenseTypeController extends Controller
 
     public function index()
     {
-        //
+        $expensetype=Expensetype::all();
+        return view('expensetype.index')->with('expensetypes',$expensetype);
     }
 
     /**
@@ -55,7 +56,8 @@ class expenseTypeController extends Controller
         $expensetype->name=$request->input('name');
         
         $expensetype->save();
-        return redirect('./expenses/create')->with('success','You can now enter your expense');
+
+        return redirect('expensetype')->with('success','You can now enter your expense');
     }
 
     /**
@@ -67,6 +69,11 @@ class expenseTypeController extends Controller
     public function show($id)
     {
         //
+
+        $expensetype=Expensetype::findorfail($id);
+        
+         
+        return view('expensetype.show')->with('expensetype',$expensetype);
     }
 
     /**

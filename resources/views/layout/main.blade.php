@@ -32,14 +32,26 @@
 	<link href="//fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 	<!-- //web-fonts -->
+	<!-- Latest compiled and minified JavaScript -->
+
+	<!-- jquery -->
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   
+	<!-- /jquery -->
+	<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+
 </head>
 
 <body>
 	
 	
-	@yield('content');
+	@yield('content')
 	
 
 </body>
+@yield('script')
 
 </html>

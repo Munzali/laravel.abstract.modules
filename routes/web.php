@@ -12,10 +12,15 @@
 */
 
 
-Route::resource('expensetype','expenseTypeController',['except'=>['edit','update','show','delete']]);
-//Route::post('expenses/{expense_type_id}',['uses'=>'expenseController@store', 'as'=>'expense.store']);
-Route::resource('expenses','expenseController',['except'=>['edit','update','show','delete']]);
+Route::resource('expensetype','expenseTypeController',['except'=>['edit','update','delete']]);
+
+Route::get('/expenses',['uses'=>'expenseController@index', 'as'=>'expenses.index']);
+Route::post('suboutput','expenseController@fetchdata')->name('suboutput');
+
+
+Route::post('expenses/{expense_type_id}',['uses'=>'expenseController@store', 'as'=>'expenses.store']);
 Auth::routes();
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');
